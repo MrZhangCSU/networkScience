@@ -253,7 +253,7 @@ void createLink(void)
     averageGain = sumGain/SIZE;
 
     femi = abs(player_payoff[player1]-player_payoff[player2]) / (2*averageGain);
-    if(averageGain == 0.0) femi = 1;                                            //避免最开始出现0/0的情况
+    //if(averageGain == 0.0) femi = 1;                                            //避免最开始出现0/0的情况
     if (femi > randf())
     player_adjacency[player1][player2] = 1;
     player_adjacency[player2][player1] = 1;
@@ -338,7 +338,9 @@ void tongji(void)
 /******************************  主函数   ***************************/
 int main()
 {
-	int steps, propor;
+    int steps, propor;
+    int countNumber = 0;
+    int i,j;
 	double x,XX,aa,x1,XX1,aa1;
 	outfile1.open("frequency.txt");
     outfile2.open("average.txt");
@@ -368,7 +370,7 @@ int main()
     for(b=1.0; b<1.8 ; b=b+0.02)
     {
         initial();                                      //初始化空间个体中的策略
-        for ( propor=0; propor<60; propor=propor+10)    //分别从0-50%的初始状态进行迭代
+        for ( propor=10; propor<60; propor=propor+10)    //分别从0-50%的初始状态进行迭代
         {
             cout<<"The temptation to defect is :"<<b<<" and the proportion of beginning is:"<<propor<<endl;
             aa=0;
@@ -391,6 +393,18 @@ int main()
                     XX1 = x1;
                     //break;                             
                 }
+
+                for(i=0; i<SIZE; i++)                   //矩阵满时候停止本轮循环
+                {
+                    for(j=0; j<SIZE; j++)
+                    {
+                        if (player_adjacency[i][j] !=0)
+                            countNumber++;
+                    }
+                }
+                if (countNumber == SIZE*SIZE)
+                    break;
+
                 if(steps > MC_STEPS-1001)
                 {
                     aa += x;
