@@ -124,7 +124,7 @@ void initial(void)
 	 defector1=0;
     for (i=0; i<SIZE; i++)
     {
-        player_s[i]=randi(2);
+        player_s[i]=(int)randi(2);
         switch(player_s[i])
         {
             case 0: cooperator1++;  break;
@@ -239,12 +239,12 @@ void createLink(void)
     double averageGain=0.0;
     do
     {
-        player1 = randi(SIZE);
+        player1 = (int)randi(SIZE);
         do
         {
-            player2 = randi(SIZE);
-        }while(player1 != player2);
-    }while( player_adjacency[player1][player2]==0 );
+            player2 = (int)randi(SIZE);
+        }while(player1 == player2);
+    }while( player_adjacency[player1][player2] != 0 );
 
     for(i=0; i<SIZE; i++)
     {
