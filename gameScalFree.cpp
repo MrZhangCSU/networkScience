@@ -362,7 +362,7 @@ int main()
 	// initialize the random number generation
 	sgenrand(RANDOMIZE);
 
-
+    cout<<"Start the experiment!"<<endl;
 	// begins the mc steps
 	int ii;    
     for(b=1.0; b<1.8 ; b=b+0.02)
@@ -370,6 +370,7 @@ int main()
         initial();                                      //初始化空间个体中的策略
         for ( propor=0; propor<60; propor=propor+10)    //分别从0-50%的初始状态进行迭代
         {
+            cout<<"The temptation to defect is :"<<b<<" and the proportion of beginning is:"<<propor<<endl;
             aa=0;
             aa1=0;
             initialAdjacency(propor);
