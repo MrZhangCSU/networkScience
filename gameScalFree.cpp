@@ -389,7 +389,7 @@ int main()
                 {
                     XX = x;
                     XX1 = x1;
-                    break;                             
+                    //break;                             
                 }
                 if(steps > MC_STEPS-1001)
                 {
