@@ -263,22 +263,25 @@ void createLink(void)
 /****************************** 策略更新 **************************/
 void update(void)
 {
-	int i,j,choice;
+	int i,j,k,choice;
     int player1,player2,player3;
     int degree, degree1, degree2;
-    int numberOfNeighbour=0;
-    int numberOfCount=0;
-    double numberOfRandom;
+    int numberOfNeighbour=0;                            //统计邻居有多少个
+    int numberOfCount=0;                                //统计数到了第几个邻居
+    double numberOfRandom=0.0;                          //生成的随机数
 	double score1,score2,dscore;
 	double femi;
 	for(i=0;i<SIZE;i++)
 	{
+        numberOfCount = 0;
+        numberOfNeighbour = 0;
+        numberOfRandom = 0.0;
 		player1 = (int) randi(SIZE);					//为什么是随机选的player1？？？？？？？？？？？？？
 		// Weight_update(player1);							//异步更新，所以随机选择，然后平均每轮没人有一次机会就可以
         
-        for(i=0; i<SIZE; i++)                           //统计有多少个邻居
+        for(j=0; j<SIZE; j++)                           //统计有多少个邻居
         {
-            if(player_adjacency[player1][i] != 0)
+            if(player_adjacency[player1][j] != 0)
             {
                 numberOfNeighbour++;
             }
@@ -286,14 +289,14 @@ void update(void)
         if (numberOfNeighbour != 0)
         {
             numberOfRandom = randi(numberOfNeighbour) + 1;  //随机挑选邻居
-            for(i=0; i<SIZE; i++)
+            for(k=0; k<SIZE; k++)
             {
-                if (player_adjacency[player1][i] != 0)
+                if (player_adjacency[player1][k] != 0)
                 {
                     numberOfCount++;
                     if (numberOfCount >= numberOfRandom)
                     {
-                        choice = i;break;                   //挑选好之后推出循环
+                        choice = k;break;                   //挑选好之后推出循环
                     }
                 }
             }
@@ -313,7 +316,8 @@ void update(void)
                 femi=dscore/b;
                 if (femi>randf()) player_s[player1]=player_s[player2];
             }
-        }  
+        }
+          
 	}
 
 }
